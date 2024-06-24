@@ -9,3 +9,12 @@ This project is the backend for a Social Media System where users can like, comm
 - CRUD Operations: Create, read, update, and delete posts.
 - Likes and Comments: Like and comment on posts.
 - Password Protection: Secure user passwords with bcrypt.
+
+<h3>Technologies Used</h3>
+
+- Node.js: JavaScript runtime for building server-side applications.
+- Express: Web application framework for Node.js.
+- MongoDB: NoSQL database for storing user data and posts.
+- JWT: JSON Web Tokens for authorization.
+- bcrypt: Library for hashing and checking passwords.
+- Mongoose: MongoDB object modeling tool for Node.js.
