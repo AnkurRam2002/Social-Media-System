@@ -3,6 +3,7 @@ const authRouter = express.Router()
 const bcrypt = require('bcryptjs');
 const User = require('../models/user')
 
+//Register
 authRouter.post('/api/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, parseInt(5, 10));
@@ -18,7 +19,7 @@ authRouter.post('/api/register', async (req, res) => {
     }
 });
 
-//Task 1.2
+//Login
 authRouter.post('/api/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username });
@@ -36,7 +37,7 @@ authRouter.post('/api/login', async (req, res) => {
     }
 });
 
-//Task 1.3
+//Forgot Password
 authRouter.post('/api/forget-password', (req, res) => {
     res.json({ message: 'Password reset instructions sent' });
 });
