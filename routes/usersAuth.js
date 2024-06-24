@@ -2,9 +2,12 @@ const express = require('express')
 const authRouter = express.Router()
 const bcrypt = require('bcryptjs');
 const User = require('../models/user')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET;
 
 //Register
-authRouter.post('/api/register', async (req, res) => {
+authRouter.post('/register', async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, parseInt(5, 10));
         const user = new User({
@@ -20,7 +23,7 @@ authRouter.post('/api/register', async (req, res) => {
 });
 
 //Login
-authRouter.post('/api/login', async (req, res) => {
+authRouter.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username: req.body.username });
         if (!user) {
@@ -38,7 +41,7 @@ authRouter.post('/api/login', async (req, res) => {
 });
 
 //Forgot Password
-authRouter.post('/api/forget-password', (req, res) => {
+authRouter.post('/forget-password', (req, res) => {
     res.json({ message: 'Password reset instructions sent' });
 });
 

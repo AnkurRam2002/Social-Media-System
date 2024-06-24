@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET || 'secretkey';
+require('dotenv').config();
+const JWT_SECRET = process.env.JWT_SECRET;;
 
 //Added authJWTToken function to all routes that require authentication
 module.exports =  function authJWTToken(req, res, next){

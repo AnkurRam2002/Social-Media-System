@@ -1,5 +1,3 @@
-
-
 const express = require('express')
 const router = express.Router()
 const Post = require('../models/post')
@@ -8,7 +6,7 @@ const authJWTToken = require('../controllers/auth.js')
 
 //Create 
 //Protected Route
-router.post('/api/posts', authJWTToken, async (req, res) => {
+router.post('/posts', authJWTToken, async (req, res) => {
     const post = new Post({
         title: req.body.title,
         content: req.body.content
@@ -23,7 +21,7 @@ router.post('/api/posts', authJWTToken, async (req, res) => {
 
 //Get All
 //Protected Route
-router.get('/api/posts', authJWTToken, async (req, res) => {
+router.get('/', authJWTToken, async (req, res) => {
     try{
         const posts = await Post.find()
         res.send(posts)
@@ -34,7 +32,7 @@ router.get('/api/posts', authJWTToken, async (req, res) => {
 
 //Get by ID
 //Protected Route
-router.get('/api/posts/:id', authJWTToken, getPost, async (req, res) => {
+router.get('/:id', authJWTToken, getPost, async (req, res) => {
     try{
         const post = await res.post
         res.send(post)
@@ -45,7 +43,7 @@ router.get('/api/posts/:id', authJWTToken, getPost, async (req, res) => {
 
 //Update by ID
 //Protected Route
-router.patch('/api/posts/:id', authJWTToken, getPost, async (req, res) => {
+router.patch('/:id', authJWTToken, getPost, async (req, res) => {
     if (req.body.title != null) {
         res.post.title = req.body.title
     }
@@ -62,7 +60,7 @@ router.patch('/api/posts/:id', authJWTToken, getPost, async (req, res) => {
 
 //Delete by ID
 //Protected Route
-router.delete('/api/posts/:id', authJWTToken, getPost, async(req, res) => {
+router.delete('/:id', authJWTToken, getPost, async(req, res) => {
     try{
         await res.post.deleteOne()
         res.json({message: 'Post Deleted'})
@@ -73,7 +71,7 @@ router.delete('/api/posts/:id', authJWTToken, getPost, async(req, res) => {
 
 // Like a post by ID
 //Protected Route
-router.post('/api/posts/:id/like', authJWTToken, getPost,  async (req, res) => {
+router.post('/:id/like', authJWTToken, getPost,  async (req, res) => {
     post = await res.post
     try {
         post.likes++;
@@ -86,7 +84,7 @@ router.post('/api/posts/:id/like', authJWTToken, getPost,  async (req, res) => {
 
 // Add a comment to a post by ID
 //Protected Route
-router.post('/api/posts/:id/comments', authJWTToken, getPost,  async (req, res) => {
+router.post('/:id/comments', authJWTToken, getPost,  async (req, res) => {
     post = await res.post
     try {
         post.comments.push(req.body.comment);
