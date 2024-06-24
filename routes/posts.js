@@ -82,6 +82,17 @@ router.post('/:id/like', authJWTToken, getPost,  async (req, res) => {
     }
 });
 
+router.post('/:id/unlike', authJWTToken, getPost,  async (req, res) => {
+    post = await res.post
+    try {
+        post.likes--;
+        await post.save();
+        res.json({ message: 'Post unliked successfully' });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Add a comment to a post by ID
 //Protected Route
 router.post('/:id/comments', authJWTToken, getPost,  async (req, res) => {
